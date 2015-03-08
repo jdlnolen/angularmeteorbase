@@ -11,4 +11,4 @@ Feature: One-liner description of this feature
   Scenario:
     Given I am on the home page
     When I navigate to "/"
-    Then I should see the title of "NGHandshake"
+    Then I should see the title of "Angular Base"
