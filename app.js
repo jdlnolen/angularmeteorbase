@@ -1,19 +1,33 @@
+Items = new Mongo.Collection("items");
+
 if (Meteor.isClient) {
-  angular.module('angularbase',['angular-meteor']);
- 
-  angular.module("angularbase").controller("ItemsListCtrl", ['$scope',
-      function($scope){
 
-        $scope.items = [
-          {'name': 'item 1',
-            'description': 'this is item 1'},
-          {'name': 'item 2',
-            'description': 'this is item 2'},
-          {'name': 'item 3',
-            'description': 'this is item 3'}
-        ];
+    angular.module('angularbase',['angular-meteor']);
 
-     }]);   
+    angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor',
+            function($scope, $meteor){
 
+            $scope.items = $meteor.collection(Items);
+
+    }]);
 }
 
+if (Meteor.isServer) {
+  Meteor.startup(function () {
+    if (Items.find().count() === 0) {
+
+      var items = [
+        {'name': 'Dubstep-Free Zone',
+          'description': 'Can we please just for an evening not listen to dubstep.'},
+        {'name': 'All dubstep all the time',
+          'description': 'Get it on!'},
+        {'name': 'Savage lounging',
+          'description': 'Leisure suit required. And only fiercest manners.'}
+      ];
+
+      for (var i = 0; i < items.length; i++)
+        Items.insert({name: items[i].name, description: items[i].description});
+
+    }
+   });
+}
