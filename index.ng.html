@@ -1,15 +1,10 @@
 <title>Angular Base</title>
- <ul>
-    <li>
-      <span>Base List</span>
-      <p>
-           item 1
-      </p>
-    </li>
-    <li>
-      <span>item 2</span>
-      <p>
-          nice item!
-      </p>
+ 
+<div ng-controller="ItemsListCtrl">
+  <ul>
+    <li ng-repeat="item in items">
+      {{item.name}}
+      <p>{{item.description}}</p>
     </li>
   </ul>
+</div>
