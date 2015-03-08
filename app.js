@@ -8,8 +8,13 @@ if (Meteor.isClient) {
             function($scope, $meteor){
 
             $scope.items = $meteor.collection(Items);
+                
+            $scope.remove = function(item){
+                $scope.items.splice( $scope.items.indexOf(item), 1 );
+            };
 
     }]);
+
 }
 
 if (Meteor.isServer) {
