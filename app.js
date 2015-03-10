@@ -3,7 +3,29 @@ Items = new Mongo.Collection("items");
 if (Meteor.isClient) {
 
     angular.module('angularbase',['angular-meteor']);
+    
+    angular.module('angularbase',['angular-meteor', 'ui.router']);
+    
+    angular.module('angularbase').config(['$urlRouterProvider', '$stateProvider', '$locationProvider',
+  function($urlRouterProvider, $stateProvider, $locationProvider){
 
+        $locationProvider.html5Mode(true);
+
+      $stateProvider
+        .state('items', {
+          url: '/items',
+            templateUrl: 'items-list.ng.html',
+            controller: 'ItemsListCtrl'
+        })
+        .state('itemDetails', {
+            url: '/items/:itemId',
+            templateUrl: 'item-details.ng.html',
+            controller: 'ItemDetailsCtrl'
+        });
+
+      $urlRouterProvider.otherwise("/items");
+    }]);
+    
     angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor',
             function($scope, $meteor){
 
@@ -14,6 +36,13 @@ if (Meteor.isClient) {
             };
 
     }]);
+    
+    angular.module('angularbase').controller("ItemDetailsCtrl", ['$scope', '$stateParams',
+  function($scope, $stateParams){
+
+    $scope.itemId = $stateParams.itemId;
+
+}]);
 
 }
 

@@ -1,0 +1,17 @@
+<title>Angular Base</title> 
+<form>
+      <label>Name</label>
+      <input ng-model="newItem.name">
+      <label>Description</label>
+      <input ng-model="newItem.description">
+      <button ng-click="parties.push(newItem)">Add</button>
+</form>
+    <ul>
+      <li ng-repeat="item in items">
+        <a href="/items/{{item._id}}">{{item.name}}</a>
+
+        <p>{{item.description}}</p>
+        <button ng-click="remove(item)">X</button>
+      </li>
+    </ul>
+
