@@ -4,7 +4,7 @@
       <input ng-model="newItem.name">
       <label>Description</label>
       <input ng-model="newItem.description">
-      <button ng-click="parties.push(newItem)">Add</button>
+      <button ng-click="newItem.owner=$root.currentUser._id; items.push(newItem)">Add</button>
 </form>
     <ul>
       <li ng-repeat="item in items">
