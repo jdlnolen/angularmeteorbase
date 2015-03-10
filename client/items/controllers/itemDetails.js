@@ -2,6 +2,9 @@
   function($scope, $stateParams, $meteor){
 
     $scope.item = $meteor.object(Items, $stateParams.itemId, false);
+      
+    $scope.item = $meteor.object(Items, $stateParams.itemId).subscribe('items');
+    $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');  
 
     $scope.save = function() {
       $scope.item.save().then(function(numberOfDocs){

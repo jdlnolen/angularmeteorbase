@@ -4,6 +4,8 @@
       <input ng-model="newItem.name">
       <label>Description</label>
       <input ng-model="newItem.description">
+      <label>Public</label>
+      <input type="checkbox" ng-model="newItem.public">
       <button ng-click="newItem.owner=$root.currentUser._id; items.push(newItem)">Add</button>
 </form>
     <ul>
