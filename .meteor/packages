@@ -8,6 +8,8 @@ meteor-platform
 urigo:angular
 xolvio:cucumber@0.5.2
 xolvio:webdriver@0.5.2
+#xolvio:cucumber@0.5.2
+#xolvio:webdriver@0.5.2
 angularui:angular-ui-router
 accounts-password
 accounts-ui
