@@ -13,3 +13,5 @@ xolvio:webdriver@0.5.2
 angularui:angular-ui-router
 accounts-password
 accounts-ui
+urigo:angular-utils-pagination
+tmeasday:publish-counts

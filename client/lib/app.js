@@ -1,4 +1,4 @@
-angular.module('angularbase',['angular-meteor', 'ui.router']);
+angular.module('angularbase',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
 
 function onReady() {
   angular.bootstrap(document, ['angularbase']);

@@ -8,12 +8,21 @@
       <input type="checkbox" ng-model="newItem.public">
       <button ng-click="newItem.owner=$root.currentUser._id; items.push(newItem)">Add</button>
 </form>
-    <ul>
-      <li ng-repeat="item in items">
+    
+<ul>
+    <h1>Items:</h1>
+    <div>
+        <input type="search" ng-model="search" placeholder="Search">
+        <select ng-model="orderProperty">
+            <option value="1">Ascending</option>
+            <option value="-1">Descending</option>
+        </select>
+    </div>
+    <li dir-paginate="item in items | itemsPerPage: perPage" total-items="itemsCount.count">       
         <a href="/items/{{item._id}}">{{item.name}}</a>
-
         <p>{{item.description}}</p>
         <button ng-click="remove(item)">X</button>
-      </li>
-    </ul>
+    </li>
+</ul>
 
+<dir-pagination-controls on-page-change="pageChanged(newPageNumber)"></dir-pagination-controls>
