@@ -9,8 +9,8 @@ Here you will see and change the details of the item:
 <button><a href="/items">Cancel</a></button>
 
 <ul>
-  Users:
-  <li ng-repeat="user in users">
-    <div>{{ user.emails[0].address }}</div>
+  Users to invite:
+  <li ng-repeat="user in users | uninvited:item">
+    <div>{{ user | displayName }}</div>
   </li>
 </ul>

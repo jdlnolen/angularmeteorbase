@@ -22,6 +22,7 @@
         <a href="/items/{{item._id}}">{{item.name}}</a>
         <p>{{item.description}}</p>
         <button ng-click="remove(item)">X</button>
+        <p><small>Posted by {{ creator(item) | displayName }}</small></p>
     </li>
 </ul>
 

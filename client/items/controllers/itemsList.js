@@ -1,10 +1,12 @@
-angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor',
-            function($scope, $meteor){
+angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor', '$rootScope',
+            function($scope, $meteor, $rootScope){
 
             $scope.page = 1;
             $scope.perPage = 10;
             $scope.sort = { name: 1 };
             $scope.orderProperty = '1';
+                                                           
+            $meteor.subscribe('users');
 
             $scope.items = $meteor.collection(function() {
                 return Items.find({}, {
@@ -34,5 +36,24 @@ angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor',
                 if ($scope.orderProperty)
                     $scope.sort = {name: parseInt($scope.orderProperty)};
             });
+                                                           
+            $scope.getUserById = function(userId){
+                return Meteor.users.findOne(userId);
+            };
 
+            $scope.creator = function(item){
+                if (!item)
+            return;
+            var owner = $scope.getUserById(item.owner);
+            if (!owner)
+                return "nobody";
+
+            if ($rootScope.currentUser)
+                if ($rootScope.currentUser._id)
+                    if (owner._id === $rootScope.currentUser._id)
+                        return "me";
+            return owner;
+        };                                               
+                                                           
+      
     }]);
