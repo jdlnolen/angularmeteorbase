@@ -12,7 +12,11 @@ Meteor.publish("items", function (options, searchString) {
       {$and:[
         {owner: this.userId},
         {owner: {$exists: true}}
-      ]}
+      ]},
+      {$and:[
+        {invited: this.userId},
+        {invited: {$exists: true}}
+       ]}     
     ]}), { noReady: true });
   return Items.find({
     'name' : { '$regex' : '.*' + searchString || '' + '.*', '$options' : 'i' },
@@ -24,6 +28,10 @@ Meteor.publish("items", function (options, searchString) {
       {$and:[
         {owner: this.userId},
         {owner: {$exists: true}}
-      ]}
+      ]},
+      {$and:[
+        {invited: this.userId},
+        {invited: {$exists: true}}
+       ]} 
     ]} ,options);
 });

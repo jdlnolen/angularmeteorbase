@@ -11,9 +11,22 @@
       
     $scope.users = $meteor.collection(Meteor.users, false).subscribe('users');  
 
+    $scope.invite = function(user){
+        $meteor.call('invite', $scope.item._id, user._id).then(
+            function(data){
+                console.log('success inviting', data);
+            },
+            function(err){
+                console.log('failed', err);
+            }
+        );  
+    };  
+      
     $scope.$on('$destroy', function() {
       subscriptionHandle.stop();
     });
+      
+      
 
 }]);
     

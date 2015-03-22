@@ -12,5 +12,6 @@ Here you will see and change the details of the item:
   Users to invite:
   <li ng-repeat="user in users | uninvited:item">
     <div>{{ user | displayName }}</div>
+    <button ng-click="invite(user)">Invite</button>
   </li>
 </ul>
