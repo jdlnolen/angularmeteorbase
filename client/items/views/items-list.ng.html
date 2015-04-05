@@ -1,5 +1,5 @@
 <title>Angular Base</title> 
-<form>
+<form ng-show="$root.currentUser">
       <label>Name</label>
       <input ng-model="newItem.name">
       <label>Description</label>
@@ -8,7 +8,11 @@
       <input type="checkbox" ng-model="newItem.public">
       <button ng-click="newItem.owner=$root.currentUser._id; items.push(newItem)">Add</button>
 </form>
-    
+
+<div ng-hide="$root.currentUser || $root.loggingIn">
+  Log in to create an item!
+</div>
+
 <ul>
     <h1>Items:</h1>
     <div>
@@ -21,11 +25,14 @@
     <li dir-paginate="item in items | itemsPerPage: perPage" total-items="itemsCount.count">       
         <a href="/items/{{item._id}}">{{item.name}}</a>
         <p>{{item.description}}</p>
-        <button ng-click="remove(item)">X</button>
-        <div>
+        <button ng-click="remove(item)" ng-show="$root.currentUser && $root.currentUser._id == item.owner">X</button>
+        <div ng-show="$root.currentUser">
             <input type="button" value="I'm going!" ng-click="rsvp(item._id, 'yes')">
             <input type="button" value="Maybe" ng-click="rsvp(item._id, 'maybe')">
             <input type="button" value="No" ng-click="rsvp(item._id, 'no')">
+        </div>
+        <div ng-hide="$root.currentUser">
+            <i>Sign in to RSVP for this item.</i>
         </div>
         <div>
             Who is coming:
@@ -48,6 +55,23 @@
                 {{ invitedUser | displayName }}
             </li>
         </ul>
+        
+        <ul ng-if="!item.public">
+            Users who not responded:
+            <li ng-repeat="invitedUser in outstandingInvitations(item)">
+                {{ invitedUser | displayName }}
+            </li>
+        </ul>
+        <div ng-if="item.public">
+            Everyone is invited 
+        </div>
+        
+        
+        
+        
+        
+        
+        
         
         
         <p><small>Posted by {{ creator(item) | displayName }}</small></p>

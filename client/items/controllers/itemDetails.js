@@ -22,6 +22,13 @@
         );  
     };  
       
+    $scope.canInvite = function (){
+        if (!$scope.item)
+            return false;
+        return !$scope.item.public &&
+        $scope.item.owner === Meteor.userId();
+    };  
+      
     $scope.$on('$destroy', function() {
       subscriptionHandle.stop();
     });
