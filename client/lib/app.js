@@ -1,4 +1,4 @@
-angular.module('angularbase',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination']);
+angular.module('angularbase',['angular-meteor', 'ui.router', 'angularUtils.directives.dirPagination', 'uiGmapgoogle-maps']);
 
 function onReady() {
   angular.bootstrap(document, ['angularbase']);

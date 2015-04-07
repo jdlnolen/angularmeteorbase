@@ -21,6 +21,26 @@ angular.module('angularbase').controller("ItemsListCtrl", ['$scope', '$meteor', 
                     sort: $scope.getReactively('sort') 
                 }, $scope.getReactively('search')).then(function() {
                     $scope.itemsCount = $meteor.object(Counts ,'numberOfItems', false);
+                    
+                    $scope.items.forEach( function (item) {
+                        item.onClicked = function () {
+                            onMarkerClicked(item);
+                        };
+                    });
+
+                $scope.map = {
+                    center: {
+                    latitude: 45,
+                    longitude: -73
+                },
+                    zoom: 8
+                };
+
+                var onMarkerClicked = function(marker){
+                        $state.go('itemDetails', {partyId: marker._id});
+                }
+                    
+                    
                 });
             });
 

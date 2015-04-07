@@ -33,6 +33,45 @@
       subscriptionHandle.stop();
     });
       
+    $scope.map = {
+        center: {
+        latitude: 45,
+        longitude: -73
+    },
+    zoom: 8,
+    events: {
+    click: function (mapModel, eventName, originalEventArgs) {
+      if (!$scope.item)
+        return;
+
+      if (!$scope.item.location)
+        $scope.item.location = {};
+
+      $scope.item.location.latitude = originalEventArgs[0].latLng.lat();
+      $scope.item.location.longitude = originalEventArgs[0].latLng.lng();
+      //scope apply required because this event handler is outside of the angular domain
+      $scope.$apply();
+    }
+  },
+  marker: {
+    options: { draggable: true },
+    events: {
+      dragend: function (marker, eventName, args) {
+        if (!$scope.item.location)
+          $scope.item.location = {};
+
+        $scope.item.location.latitude = marker.getPosition().lat();
+        $scope.item.location.longitude = marker.getPosition().lng();
+      }
+    }
+  }
+};
+      
+      
+      
+      
+      
+      
       
 
 }]);
